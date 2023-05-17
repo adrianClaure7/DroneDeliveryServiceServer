@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DroneDeliveryServiceServer.Models;
 using DroneDeliveryServiceServer.Services;
+using System.Text.Json;
 
 namespace DroneDeliveryServiceServer.Controllers
 {
@@ -15,33 +16,41 @@ namespace DroneDeliveryServiceServer.Controllers
             _dronTipService = new DroneTripService<DroneTrip>();
         }
 
-        [HttpGet]
-        public IActionResult GetAllItems()
+        [HttpPost]
+        public IActionResult GetAllItems(JsonDocument inputData)
         {
-            var inputData = new Dictionary<string, object>
+            var drones = new List<Drone>();
+            var locations = new List<Location>();
+
+            foreach (var droneElement in inputData.RootElement.GetProperty("drones").EnumerateArray())
             {
-                ["drones"] = new List<Drone>
+                var drone = new Drone
                 {
-                    new Drone { DroneName = "DroneA", MaxWeight = 300 },
-                    new Drone { DroneName = "DroneB", MaxWeight = 350 },
-                    new Drone { DroneName = "DroneC", MaxWeight = 200 }
-                },
-                ["locations"] = new List<Location>
+                    DroneName = droneElement.GetProperty("droneName").GetString(),
+                    MaxWeight = droneElement.GetProperty("maxWeight").GetInt32()
+                };
+                drones.Add(drone);
+            }
+
+            foreach (var locationElement in inputData.RootElement.GetProperty("locations").EnumerateArray())
+            {
+                var location = new Location
                 {
-                    new Location { Name = "LocationA", Weight = 200 },
-                    new Location { Name = "LocationB", Weight = 150 },
-                    new Location { Name = "LocationC", Weight = 50 },
-                    new Location { Name = "LocationD", Weight = 150 },
-                    new Location { Name = "LocationE", Weight = 100 },
-                    new Location { Name = "LocationF", Weight = 200 },
-                    new Location { Name = "LocationG", Weight = 50 },
-                    new Location { Name = "LocationH", Weight = 80 },
-                    new Location { Name = "LocationI", Weight = 70 },
-                    new Location { Name = "LocationJ", Weight = 50 }
-                }
+                    Name = locationElement.GetProperty("name").GetString(),
+                    Weight = locationElement.GetProperty("weight").GetInt32()
+                };
+                locations.Add(location);
+            }
+
+            var inputData2 = new Dictionary<string, object>
+            {
+                ["drones"] = drones,
+                ["locations"] = locations
             };
-            // Call the function to assign locations to drones
-            List<DroneTrip> items = _dronTipService.AssignLocationsToDrones(inputData);
+
+            // Call the service method to assign locations to drones
+            List<DroneTrip> items = _dronTipService.AssignLocationsToDrones(inputData2);
+
             return Ok(items);
         }
     }
