@@ -1,0 +1,43 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.userprefs
+*.vscode
+*.vssscc
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+*.sln.docstates
+*.csproj.user
+*.bak
+*.cache
+*.resharper
+*.resharper.user
+*.dotCover
+
+# NuGet
+packages/
+
+# MSTest Test Results
+TestResults/
+
+# Resharper
+_ReSharper.*
+
+# Build results of an ATL Project
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
