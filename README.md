@@ -14,7 +14,7 @@ Follow these steps to get the Drone Delivery Service API up and running:
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/your-repo.git
+https://github.com/adrianClaure7/DroneDeliveryServiceServer.git
 
 2. Navigate to the project directory:
 
