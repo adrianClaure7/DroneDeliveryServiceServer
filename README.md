@@ -127,4 +127,4 @@ dotnet test ./Tests
 
 ## Credits
 
-Development: Your Name
+Development: Adrian Claure
