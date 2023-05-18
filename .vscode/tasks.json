@@ -36,6 +36,13 @@
                 "${workspaceFolder}/DroneDeliveryServiceServer.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet test",
+            "type": "shell",
+            "command": "dotnet",
+            "args": ["test", "${workspaceFolder}/Tests"],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

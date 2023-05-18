@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "Run Server",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -25,9 +25,14 @@
             }
         },
         {
-            "name": ".NET Core Attach",
+            "name": "Run Tests",
             "type": "coreclr",
-            "request": "attach"
+            "request": "launch",
+            "preLaunchTask": "dotnet test",
+            "program": "${workspaceFolder}/bin/Debug/net6.0/DroneDeliveryServiceServer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false
         }
     ]
 }
